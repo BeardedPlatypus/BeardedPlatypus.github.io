@@ -157,6 +157,13 @@ body {
     margin-bottom: 2.2em;
 }
 
+.article-body {
+    color: $grey2;
+    @include source-sans-pro(400);
+    text-align: left;
+    margin-bottom: 2.2em;
+}
+
 .article-divider {
     
 }
@@ -172,6 +179,24 @@ body {
     display: block;
     font-size: 0.8em;
     margin-top: -1.3em;
+}
+
+.page {
+    
+}
+
+.page-title {
+    color: $grey2;
+    @include source-sans-pro(700);
+    font-size: 2.0em;
+    text-align: left;
+}
+
+.page-body {
+    color: $grey2;
+    @include source-sans-pro(400);
+    text-align: left;
+    margin-bottom: 2.2em;
 }
 
 /* --------------------------------------------- */

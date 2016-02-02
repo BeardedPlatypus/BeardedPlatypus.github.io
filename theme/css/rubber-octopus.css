@@ -105,6 +105,13 @@ body {
   text-align: left;
   margin-bottom: 2.2em; }
 
+.article-body {
+  color: #282D33;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: 2.2em; }
+
 .article-divider-line {
   width: 100%;
   border-bottom: 1px solid #6B6F7A; }
@@ -115,6 +122,20 @@ body {
   display: block;
   font-size: 0.8em;
   margin-top: -1.3em; }
+
+.page-title {
+  color: #282D33;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 2.0em;
+  text-align: left; }
+
+.page-body {
+  color: #282D33;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: 2.2em; }
 
 /* --------------------------------------------- */
 /*  5. Footer                                    */

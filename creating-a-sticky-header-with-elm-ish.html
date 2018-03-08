@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport"  content="width=device-width, initial-scale=1">
+
+    <title>Monty's Blog</title>
+
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous">
+
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700|Roboto:300,400"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="../theme/css/rubber-octopus.css"  >
+
+
+</head>
+
+<body>
+    <header class="body">
+        <div id="header"></div>
+    </header>
+
+
+    <div class="col-12">
+        <section class="ro-body body"
+                 id="content">
+<div class="container" >
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="col-12 ro-article"><div class="row
+                ro-article-header">
+        <div class="col-12" ><div class="row
+                        ro-article-meta
+                        ro-article-date
+                        ro-meta-text" >
+                <span>
+                    <time class="published"
+                          datetime="Thu 08 March 2018" >
+                        Thu 08 March 2018
+                    </time>
+                </span>
+            </div><div class="row
+                        ro-article-title">
+                <a href="/creating-a-sticky-header-with-elm-ish.html">
+                    <h1 class="ro-title-text">
+                        Creating a sticky header with elm(-ish)
+                    </h1>
+                </a>
+            </div><div class="row
+                        ro-article-meta
+                        ro-article-categorisation
+                        ro-meta-text" >
+                <span>
+                    Category: 
+                    <a href="/category/programming.html">
+                        programming
+                    </a>
+                </span>
+                <span class="ro-meta-tags">
+                    Tags: 
+                    <a href="/tags/elm.html">elm</a>
+                    <a href="/tags/html.html">html</a>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div><div class="row
+                ro-article-body">
+        <div class="ro-article-content
+                    ro-body-text">
+            <p>
+                <p>I have added a simple sticky header to this blog (at the time of writing). I 
+figured I would write a little article about the design and code, both as a 
+personal reminder and to hopefully help people like you. This sticky header is
+written in elm(-ish). For those that do not know <a href="http://elm-lang.org">elm</a>, it
+is basically a functional programming languages which compiles into Javascript.
+It allows one to build interactive web applications without run-time errors.
+Ever since I had to use it for an university project, I have loved this little
+language.</p>
+<p>Using elm for such a small element of my blog is probably overkill, and a couple
+of lines of simple Javascript could have sufficed as well. However, me being me, 
+I opted for the more convoluted approach. The main reason to use elm, is to 
+explore how well it would play together with 
+<a href="https://blog.getpelican.com">Pelican</a>, the static site generator I use for this
+blog. Furthermore, since it is such a small feature of the site, it was a good 
+simple exercise to keep my elm skills a bit fresh. So without further ado, let's
+take a look at the header.</p>
+<h1>Layout</h1>
+<p>The header I had envisioned is quite simple. The top part would be contain 
+some branding in the form of "Monthy's Blog" in big letters. Underneath that
+the navbar containing links to the blog, about-me and portfolio pages.
+The navbar should turn sticky once we scrolled past the branding. </p>
+<p>This leads to the following layout hierarchy: </p>
+<ul>
+<li>div: banner<ul>
+<li>div: navbar<ul>
+<li>div: brand</li>
+<li>div: navigation elements<ul>
+<li>link: blog</li>
+<li>link: about me</li>
+<li>link: portfolio</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>with the layout planned, we can move to implementing the header in elm.</p>
+<h1>Code and Pelican Interop</h1>
+<p>We divide the code into two parts, first I'll go over all the elm code needed
+to get the header working. Then we will look at the html/javascript side.</p>
+<h2>Elm</h2>
+<p>Web apps, no matter the size, generally use the same typical architecture.
+This architecture is explained in depth in the main elm tutorial, which can be
+found <a href="https://guide.elm-lang.org/architecture/">here</a>. The basic structure 
+consists of three components:</p>
+<ul>
+<li>Model: holds the state of the application</li>
+<li>Msg / Update: provides the method of updating your Model based upon messages
+                that the app can send.</li>
+<li>View: describes how the model is displayed and how messages are generated 
+        based upon user-input.</li>
+</ul>
+<h3>Model</h3>
+<div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kr">alias</span> <span class="kt">NavElement</span> <span class="nf">=</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span>
+
+<span class="kr">type</span> <span class="kr">alias</span> <span class="kt">Model</span> <span class="nf">=</span> <span class="p">{</span> <span class="nv">nav_elements</span> <span class="nf">:</span> <span class="kt">List</span> <span class="kt">NavElement</span>
+                   <span class="p">,</span> <span class="nv">title</span> <span class="nf">:</span> <span class="kt">String</span>
+                   <span class="p">,</span> <span class="nv">is_fixed</span> <span class="nf">:</span> <span class="kt">Bool</span>
+                   <span class="p">}</span>
+
+<span class="nv">model</span> <span class="nf">:</span> <span class="kt">List</span> <span class="kt">NavElement</span> <span class="nf">-&gt;</span> <span class="kt">String</span> <span class="nf">-&gt;</span> <span class="kt">Model</span>
+<span class="nv">model</span> <span class="nv">nav_elements</span> <span class="nv">title</span> <span class="nf">=</span> <span class="p">{</span> <span class="nv">nav_elements</span> <span class="nf">=</span> <span class="nv">nav_elements</span>
+                                  <span class="p">,</span> <span class="nv">title</span>        <span class="nf">=</span> <span class="nv">title</span>
+                                  <span class="p">,</span> <span class="nv">is_fixed</span>     <span class="nf">=</span> <span class="kt">False</span>
+                                  <span class="p">}</span>
+</pre></div>
+
+
+<p>The model consists of three elements. <code>nav_elements</code> describes the navigation
+elements, these consist of a name of the page, i.e. blog, and the url to the
+specific website page. The <code>title</code> describes the title which is placed in the 
+branding section of the header. Finally, <code>is_fixed</code> describes whether the 
+navigational elements should be fixed or not. </p>
+<h3>Update / Msg</h3>
+<p>The only change that can currently happen within the header, is the switch 
+from non-fixed navigational elements to fixed navigational elements, and 
+vice-versa. This is modelled in the <code>is_fixed</code> element of the Model, and 
+updated in the <code>update</code> function. The amount scrolled by the user can be
+modelled as a float value. Each time the user scrolls up or down, the app
+receives a new float value describing the new situation. As such we need
+to define a single message containing this new float:</p>
+<div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">Msg</span> <span class="nf">=</span> <span class="kt">UpdateScrollPos</span> <span class="kt">Float</span>
+</pre></div>
+
+
+<p>Whenever the user scrolls, this value is passed to the update which function
+which determines if the <code>is_fixed</code> attribute should be updated.</p>
+<div class="highlight"><pre><span></span><span class="nv">update</span> <span class="nf">:</span> <span class="kt">Msg</span> <span class="nf">-&gt;</span> <span class="kt">Model</span> <span class="nf">-&gt;</span> <span class="p">(</span><span class="kt">Model</span><span class="p">,</span> <span class="kt">Cmd</span> <span class="kt">Msg</span><span class="p">)</span>
+<span class="nv">update</span> <span class="nv">msg</span> <span class="nv">model</span> <span class="nf">=</span>
+  <span class="kr">case</span> <span class="nv">msg</span> <span class="kr">of</span>
+    <span class="kt">UpdateScrollPos</span> <span class="nv">x</span> <span class="nf">-&gt;</span>
+      <span class="p">(</span> <span class="p">{</span> <span class="nv">model</span> <span class="nf">|</span> <span class="nv">is_fixed</span> <span class="nf">=</span> <span class="nv">x</span> <span class="nf">&gt;=</span> <span class="mf">81.</span><span class="mi">3</span> <span class="p">}</span>
+      <span class="p">,</span> <span class="kt">Cmd</span><span class="nf">.</span><span class="nv">none</span>
+      <span class="p">)</span>
+</pre></div>
+
+
+<p>We set <code>is_fixed</code> to true, whenever we scroll past 81.3, and to false, when this
+is not the case. The value 81.3 is equal to the size of the branding. Of course
+it would be significantly more elegant if we could determine this value in code,
+instead of hard coding it. However, I have not found this option in elm at the 
+current moment. Thus, this has to suffice for now.</p>
+<h3>View</h3>
+<p>Now that we have defined the model, and how to update, it is time to implement 
+the determined layout in elm: </p>
+<div class="highlight"><pre><span></span><span class="nv">viewNavElement</span> <span class="nf">:</span> <span class="kt">NavElement</span> <span class="nf">-&gt;</span> <span class="kt">Html</span> <span class="kt">Msg</span>
+<span class="nv">viewNavElement</span> <span class="p">(</span><span class="nv">txt</span><span class="p">,</span> <span class="nv">url</span><span class="p">)</span> <span class="nf">=</span>
+  <span class="nv">li</span> <span class="p">[]</span>
+     <span class="p">[</span> <span class="nv">a</span> <span class="p">[</span> <span class="nv">href</span> <span class="nv">url</span> <span class="p">]</span>
+         <span class="p">[</span> <span class="nv">text</span> <span class="nv">txt</span> <span class="p">]</span>
+     <span class="p">]</span>
+
+
+<span class="nv">viewNavElements</span> <span class="nf">:</span> <span class="kt">List</span> <span class="kt">NavElement</span> <span class="nf">-&gt;</span> <span class="kt">Bool</span> <span class="nf">-&gt;</span> <span class="kt">Html</span> <span class="kt">Msg</span>
+<span class="nv">viewNavElements</span> <span class="nv">nav_elements</span> <span class="nv">is_fixed</span> <span class="nf">=</span>
+  <span class="kr">let</span>
+    <span class="nv">att</span> <span class="nf">=</span> <span class="p">[</span> <span class="nv">class</span> <span class="s">&quot;nav&quot;</span>
+          <span class="p">,</span> <span class="nv">class</span> <span class="s">&quot;navbar-nav&quot;</span>
+          <span class="p">,</span> <span class="nv">class</span> <span class="s">&quot;banner-background&quot;</span>
+          <span class="p">,</span> <span class="nv">class</span> <span class="s">&quot;banner-background-bottom&quot;</span>
+          <span class="p">]</span>
+  <span class="kr">in</span>
+    <span class="nv">ul</span> <span class="p">(</span> <span class="kr">if</span> <span class="nv">is_fixed</span> <span class="kr">then</span> <span class="p">(</span> <span class="nv">class</span> <span class="s">&quot;sticky&quot;</span> <span class="p">)</span> <span class="nf">::</span> <span class="nv">att</span> <span class="kr">else</span> <span class="nv">att</span> <span class="p">)</span>
+       <span class="p">(</span> <span class="kt">List</span><span class="nf">.</span><span class="nv">map</span> <span class="nv">viewNavElement</span> <span class="nv">nav_elements</span> <span class="p">)</span>
+
+<span class="nv">view</span> <span class="nf">:</span> <span class="kt">Model</span> <span class="nf">-&gt;</span> <span class="kt">Html</span> <span class="kt">Msg</span>
+<span class="nv">view</span> <span class="nv">model</span> <span class="nf">=</span>
+  <span class="kr">let</span>
+    <span class="nv">brand</span> <span class="nf">=</span> <span class="nv">div</span> <span class="p">(</span> <span class="kr">if</span> <span class="nv">model</span><span class="nf">.</span><span class="nv">is_fixed</span> <span class="kr">then</span>
+                    <span class="p">[</span> <span class="nv">class</span> <span class="s">&quot;navbar-brand&quot;</span>
+                    <span class="p">,</span> <span class="nv">class</span> <span class="s">&quot;banner-background&quot;</span>
+                    <span class="p">,</span> <span class="nv">class</span> <span class="s">&quot;fixed-padding&quot;</span>
+                    <span class="p">]</span>
+                  <span class="kr">else</span>
+                    <span class="p">[</span> <span class="nv">class</span> <span class="s">&quot;navbar-brand&quot;</span>
+                    <span class="p">,</span> <span class="nv">class</span> <span class="s">&quot;banner-background&quot;</span>
+                    <span class="p">]</span>
+                <span class="p">)</span>
+                <span class="p">[</span> <span class="nv">text</span> <span class="nv">model</span><span class="nf">.</span><span class="nv">title</span> <span class="p">]</span>
+    <span class="nv">navbar</span> <span class="nf">=</span> <span class="nv">viewNavElements</span> <span class="nv">model</span><span class="nf">.</span><span class="nv">nav_elements</span> <span class="nv">model</span><span class="nf">.</span><span class="nv">is_fixed</span>
+
+  <span class="kr">in</span>
+    <span class="nv">div</span> <span class="p">[</span> <span class="nv">id</span> <span class="s">&quot;banner&quot;</span>
+        <span class="p">]</span>
+        <span class="p">[</span> <span class="nv">nav</span> <span class="p">[</span> <span class="nv">id</span>    <span class="s">&quot;site-navigation&quot;</span>
+              <span class="p">,</span> <span class="nv">class</span> <span class="s">&quot;navbar&quot;</span>
+              <span class="p">,</span> <span class="nv">attribute</span> <span class="s">&quot;role&quot;</span> <span class="s">&quot;navigation&quot;</span>
+              <span class="p">]</span>
+              <span class="p">[</span> <span class="nv">brand</span>
+              <span class="p">,</span> <span class="nv">navbar</span>
+              <span class="p">]</span>
+        <span class="p">]</span>
+</pre></div>
+
+
+<p>This function describes both the fixed and non-fixed situations, by adding
+additional classes to the elements when the header should be fixed. If the 
+header is fixed, then the brand should extend to the size of the navigational
+elements as well. This way, the content does not jump upward, due to the height
+of the navigational elements being removed from the header. This is done by
+adding the <code>fixed_padding</code> class to the brand. The bar containing the nav
+elements is made sticky by adding the <code>sticky class</code> to the <code>ul</code> class.
+The layout of the elements is equal to the layout described earlier.</p>
+<h2>Html / Javascript</h2>
+<p>In order to get the header to fully work, two more problems need to be dealt 
+with:</p>
+<ul>
+<li>Initialisation of the pages and title.</li>
+<li>Updates of the scroll position.</li>
+</ul>
+<h3>Initialisation of the elm app</h3>
+<p>In theory, we could hard code the names and pages in the elm code. However,
+this would mean, each time we want to make a small change to the name of the
+site, or add / remove pages from the navbar, we would need to edit the elm code
+again. Hardly a preferable situation. It would be a lot nicer if this data is 
+set in the html code which is generated by Pelican. Fortunate for us, this is 
+possible by using a mechanism called <a href="https://guide.elm-lang.org/interop/javascript.html">flags</a>.
+Basically, we define a set of values to be used in elm, which are provided in
+the html file in which the elm app is embedded:</p>
+<p>First we define a <code>Flags</code> record, describing the elements which will be passed
+to the elm app:</p>
+<div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kr">alias</span> <span class="kt">Flags</span> <span class="nf">=</span> <span class="p">{</span> <span class="nv">brand</span> <span class="nf">:</span> <span class="kt">String</span>
+                   <span class="p">,</span> <span class="nv">pages</span> <span class="nf">:</span> <span class="kt">List</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span>
+                   <span class="p">}</span>
+</pre></div>
+
+
+<p>Then we use these flags to create an init function, which will be used by the
+<code>Html.programWithFlags</code> to create our app:</p>
+<div class="highlight"><pre><span></span><span class="nv">init</span> <span class="nf">:</span> <span class="kt">Flags</span> <span class="nf">-&gt;</span> <span class="p">(</span><span class="kt">Model</span><span class="p">,</span> <span class="kt">Cmd</span> <span class="kt">Msg</span><span class="p">)</span>
+<span class="nv">init</span> <span class="nv">flags</span> <span class="nf">=</span>
+    <span class="p">(</span> <span class="p">(</span><span class="nv">model</span> <span class="nv">flags</span><span class="nf">.</span><span class="nv">pages</span> <span class="nv">flags</span><span class="nf">.</span><span class="nv">brand</span><span class="p">)</span>
+    <span class="p">,</span> <span class="kt">Cmd</span><span class="nf">.</span><span class="nv">none</span>
+    <span class="p">)</span>
+</pre></div>
+
+
+<p>Then finally we can add the appropriate values in the html code:</p>
+<div class="highlight"><pre><span></span>  <span class="kd">var</span> <span class="nx">node</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;header&#39;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">Elm</span><span class="p">.</span><span class="nx">Header</span><span class="p">.</span><span class="nx">embed</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">brand</span><span class="o">:</span> <span class="s2">&quot;Monthy&#39;s Blog&quot;</span><span class="p">,</span>
+    <span class="nx">pages</span><span class="o">:</span> <span class="p">[</span> <span class="p">[</span><span class="s1">&#39;Blog&#39;</span><span class="p">,</span> <span class="s1">&#39;{{ SITEURL  }}/index.html&#39;</span><span class="p">]</span>
+           <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">pages</span> <span class="o">%</span><span class="p">}</span>
+           <span class="p">,</span> <span class="p">[</span><span class="s1">&#39;{ p.title }}&#39;</span><span class="p">,</span> <span class="s1">&#39;{{ SITEURL }}/{{ p.url }}&#39;</span><span class="p">]</span>
+           <span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
+           <span class="p">]</span>
+  <span class="p">});</span>
+</pre></div>
+
+
+<p>Here we see how pelican and elm can play nicely together. The elm app receives
+the Flags field as a dictionary parameter. The flags entries contain the values
+as they are defined in the elm file, in our case this is brand and pages. 
+The pages value is set as a pelican template command, which upon generation will
+add all the pages as values in our final generated html code. Success!</p>
+<h3>Scroll Updates</h3>
+<p>Earlier, we mentioned that we receive scroll updates in the form of floats, 
+however, I did not specify where these updates came from. Unfortunately, I 
+haven't found a way to subscribe to scroll updates directly in elm, so we 
+will have to parse them from javascript. This is possible through the use
+of ports, which allows javascript to communicate with our elm app. </p>
+<p>In order to use ports we need to define our module as a ports module by adding
+the ports keyword in front of module.</p>
+<div class="highlight"><pre><span></span><span class="kr">port</span> <span class="kr">module</span> <span class="kt">Header</span> <span class="nv">exposing</span> <span class="p">(</span> <span class="nf">..</span> <span class="p">)</span>
+</pre></div>
+
+
+<p>Afterwards we can define our port that will receive the javascript updates:</p>
+<div class="highlight"><pre><span></span><span class="kr">port</span> <span class="nv">onScroll</span> <span class="nf">:</span> <span class="p">(</span><span class="kt">Float</span> <span class="nf">-&gt;</span> <span class="nv">msg</span><span class="p">)</span> <span class="nf">-&gt;</span> <span class="kt">Sub</span> <span class="nv">msg</span>
+
+<span class="nv">subscriptions</span> <span class="nf">:</span> <span class="kt">Model</span> <span class="nf">-&gt;</span> <span class="kt">Sub</span> <span class="kt">Msg</span>
+<span class="nv">subscriptions</span> <span class="nv">model</span> <span class="nf">=</span> <span class="nv">onScroll</span> <span class="kt">UpdateScrollPos</span>
+</pre></div>
+
+
+<p>This port is combined in the subscriptions used by our application. Every time
+we receive a float on this port, it is turned into an <code>UpdateScrollPos</code> message,
+which will be run through our <code>update</code> function.</p>
+<p>Now that we have defined how to deal with updates on the elm side, let's 
+generate them at the javascript side:</p>
+<div class="highlight"><pre><span></span>  <span class="nb">window</span><span class="p">.</span><span class="nx">onscroll</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="nx">updateScroll</span><span class="p">()};</span>
+
+  <span class="kd">function</span> <span class="nx">updateScroll</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">ports</span><span class="p">.</span><span class="nx">onScroll</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">pageYOffset</span><span class="p">);</span>
+  <span class="p">}</span>
+</pre></div>
+
+
+<p>We register a callback on <code>window.onscroll</code>. This means that whenever the user
+scrolls, our callback is executed. In our case, this executes the 
+<code>updateScroll()</code> function, which sends the <code>window.pageYOffset</code> to our header.
+And with that, we now generate updates whenever the user scrolls on the blog,
+allowing elm to determine whether the header should be sticky or not.</p>
+<h1>Conclusion</h1>
+<p>In this article I have described how I implemented a simple sticky header in 
+elm. Overall I would argue that this approach is probably overkill, and a simple
+javascript approach would be both simpler and more performant At the same time,
+I have shown that elm can work quite nicely with Pelican, thus proving it feasible
+to build apps combining both technologies. With that in mind I am happy with the 
+results and will continue using this header for the time being! </p>
+<p>There are two aspects, I will most likely work a bit more on. Firstly, I am not
+quite satisfied with the transition of non-sticky to sticky, which seems to be 
+primarily caused by the size of the brand padding in the sticky situation. I 
+will probably tweak the margin / padding a bit more, to ensure it feels smooth.
+Secondly, I would like to add a simple gif/animation to the header. This would 
+mean I would need to expand my elm code a little bit to make this possible. 
+As such, future versions of the header might look a bit differently than the 
+one described here. </p>
+<p>The full code for these examples can be found in 
+<a href="https://gist.github.com/BeardedPlatypus/f33e41a5af8007a947bbcccef50eea1b">this gist</a></p>
+<p>Thanks for reading, and hopefully see you again!</p>
+            </p>
+        </div>
+    </div><div class="row
+                ro-divider-container">
+            <div class="ro-divider">
+    <div class="ro-divider-line">
+    </div>
+    <div class="ro-divider-icon">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-code fa-stack-1x fa-inverse"></i>
+        </span>
+    </div>
+</div>
+
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+        </section>
+    </div>
+
+    <footer id="contentinfo"  class="body sticky-footer">
+<div class="container">
+    <ul class="footer-social-media" >
+        <li>
+            <a href="https://be.linkedin.com/in/maartentegelaers">
+                <span class="fa-layers fa-fw fa-3x">
+                    <i class="fas fa-circle"></i>
+                    <i class="fa-inverse fab fa-linkedin-in" data-fa-transform="shrink-5"></i>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="https://github.com/BeardedPlatypus">
+                <span class="fa-layers fa-fw fa-3x">
+                    <i class="fas fa-circle"></i>
+                    <i class="fa-inverse fab fa-github" data-fa-transform="shrink-5"></i>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.youtube.com/user/Month3d">
+                <span class="fa-layers fa-fw fa-3x">
+                    <i class="fas fa-circle"></i>
+                    <i class="fa-inverse fab fa-youtube" data-fa-transform="shrink-5"></i>
+                </span>
+            </a>
+        </li>
+    </ul>
+    <p class="copyright-notice">Copyright © Maarten Tegelaers</p>
+</div>    </footer>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="../theme/js/Header.js"></script>
+<script>
+  var node = document.getElementById('header');
+  var app = Elm.Header.embed(node, {
+    brand: "Monthy's Blog",
+    pages: [ ['Blog', 'beardedplatypus.github.io/index.html']
+           ]
+  });
+
+  window.onscroll = function() {updateScroll()};
+  function updateScroll() {
+    app.ports.onScroll.send(window.pageYOffset);
+  }
+</script>
+</body>
+</html>

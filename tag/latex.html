@@ -151,19 +151,18 @@ project I've modified …</p>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-<script src="../theme/js/Header.js"></script>
+<script src="../theme/js/NavMenu.js"></script>
 <script>
   var node = document.getElementById('header');
-  var app = Elm.Header.embed(node, {
-    brand: "Monthy's Blog",
-    pages: [ ['Blog', 'beardedplatypus.github.io/index.html']
-           ]
+  var app = Elm.NavMenu.embed(node, {
+    logo_text: "Blog",
+    nav: [ ['Blog', 'beardedplatypus.github.io/index.html']
+         ],
+    footer: [ [ 'https://be.linkedin.com/in/maartentegelaers', 'fa-linkedin-in' ]
+            , [ 'https://github.com/BeardedPlatypus', 'fa-github' ]
+            , [ 'https://www.youtube.com/user/Month3d', 'fa-youtube' ]
+            ]
   });
-
-  window.onscroll = function() {updateScroll()};
-  function updateScroll() {
-    app.ports.onScroll.send(window.pageYOffset);
-  }
 </script>
 </body>
 </html>

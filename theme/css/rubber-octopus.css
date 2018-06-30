@@ -16,6 +16,104 @@ h2 {
 h3 {
   font-size: 1.25em; }
 
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 2000; }
+
+.logo_box {
+  position: absolute;
+  width: 10vmin;
+  height: 10vmin;
+  z-index: 5; }
+
+.menu_interact {
+  position: absolute;
+  height: 100%; }
+
+.menu_collapsible {
+  height: 100%; }
+
+.menu_collapsible_logo_slide {
+  position: relative;
+  width: 100%;
+  height: 10vmin;
+  background-color: #4e4e4e;
+  border-bottom: 0.2vmin solid black; }
+
+.menu_collapsible_logo_text {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 2.0em;
+  color: white;
+  text-align: center;
+  padding-bottom: 2.5vmin;
+  padding-top: 2.5vmin;
+  white-space: nowrap; }
+
+.menu_collapsible_nav {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #A0A0A0;
+  border-right: 1px solid #4e4e4e; }
+
+.menu_nav {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  padding-top: 2vmin; }
+
+.menu_nav_item {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  font-size: 1.35em;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  text-align: center;
+  white-space: nowrap; }
+  .menu_nav_item:hover {
+    background-color: #696969; }
+  .menu_nav_item a {
+    color: white;
+    text-decoration: none; }
+
+.menu_footer {
+  position: absolute;
+  bottom: 0;
+  white-space: nowrap;
+  width: 100%;
+  height: 16%; }
+
+.menu_footer_social_media {
+  text-align: center;
+  width: 100%;
+  padding-left: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 0.75em;
+  color: #282D33; }
+  .menu_footer_social_media li {
+    float: none;
+    display: inline-block;
+    padding-left: 1px;
+    padding-right: 1px; }
+    .menu_footer_social_media li a {
+      padding: 0px 0px;
+      color: #282D33; }
+
+.menu_footer_copyright_notice {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 0.75em;
+  color: #282D33;
+  text-align: center; }
+
 #banner {
   padding: 0;
   z-index: 2;

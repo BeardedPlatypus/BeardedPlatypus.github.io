@@ -16,12 +16,65 @@ $grey_menu_logo: #4e4e4e;
 $grey_menu_nav:  #A0A0A0;
 $grey_menu_highlight: #696969;
 
+// -----------------------------------------------------------------------------
+// Responsive design
+// -----------------------------------------------------------------------------
+// TODO: This should be replaced with bootstrap import
+// size definitions, xs is considered everything under small
+$sm_bp:  576px;
+$md_bp:  768px;
+$lg_bp:  992px;
+$xl_bp: 1200px;
+
+$bp-up: (
+    sm: $sm_bp,
+    md: $md_bp,
+    lg: $lg_bp,
+    xl: $xl_bp,
+);
+
+@mixin media-bp-up($breakpoint) {
+    @if map-has-key($bp-up, $breakpoint) {
+        @media (min-width: #{map-get($bp-up, $breakpoint)}) {
+            @content;
+        }
+    }
+    @else {
+        @error "`#{$break-point}` is not a valid value for $break-point, possible values: [sm, md, lg, xl].";
+    }
+}
+
+$bp-down: (
+    xs: $sm_bp,
+    sm: $md_bp,
+    md: $lg_bp,
+    lg: $xl_bp,
+);
+
+
+@mixin media-bp-down($breakpoint) {
+    @if map-has-key($bp-down, $breakpoint) {
+        @media (max-width: #{map-get($bp-down, $breakpoint)}) {
+            @content;
+        }
+    }
+    @else {
+        @error "`#{$break-point}` is not a valid value for $break-point, possible values: [xs, sm, md, lg].";
+    }
+}
+
+
 
 // -----------------------------------------------------------------------------
 // Fonts
 // -----------------------------------------------------------------------------
 @mixin source-sans-pro($weight) {
     font-family: 'Source Sans Pro', sans-serif;
+    font-weight: $weight;
+}
+
+@mixin roboto($weight) {
+    font-family: 'Roboto', sans-serif;
     font-weight: $weight;
 }
 
@@ -34,6 +87,10 @@ $browser-context: 16; // Default
 @function em($pixels, $context: $browser-context) {
   @return #{$pixels/$context}em;
 }
+
+
+
+
 
 // -----------------------------------------------------------------------------
 // Elements
@@ -52,15 +109,19 @@ body {
 }
 
 h1 {
-    font-size: 2.0em;
+    font-size: 1.5em;
+
+    @include media-bp-up(lg) { font-size: 2.0em; }
 }
 
 h2 {
-    font-size: 1.5em;
+    font-size: 1.2em;
+    @include media-bp-up(lg) { font-size: 1.5em; }
 }
 
 h3 {
-    font-size: 1.25em;
+    font-size: 1.1em;
+    @include media-bp-up(lg) { font-size: 1.25em; }
 }
 
 // -----------------------------------------------------------------------------
@@ -71,6 +132,13 @@ h3 {
     left: 0;
     height: 100%;
     z-index: 2000;
+
+    font-size: 8px;
+
+    @include media-bp-up(sm) { font-size: 10px; }
+    @include media-bp-up(md) { font-size: 16px; }
+    @include media-bp-up(lg) { font-size: 20px; }
+    @include media-bp-up(xl) { font-size: 24px; }
 }
     
 .logo_box {
@@ -98,9 +166,11 @@ h3 {
 }
     
 .menu_collapsible_logo_text {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
+    @include roboto(400);
+    
     font-size: 2.0em;
+
+    
     color: white;
     text-align: center;
     padding-bottom: 2.5vmin;
@@ -130,8 +200,7 @@ h3 {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     font-size: 1.35em;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    @include roboto(300);
     text-align: center;
     white-space: nowrap;
 
@@ -142,6 +211,8 @@ h3 {
     a {
         color: white;
         text-decoration: none;
+        width: 100%;
+        display: inline-block;
     }
 }
 
@@ -157,8 +228,7 @@ h3 {
     text-align: center;
     width: 100%;
     padding-left: 0;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    @include roboto(300);
     font-size: 0.75em;
     color: $grey2;
 
@@ -177,8 +247,7 @@ h3 {
 
 
 .menu_footer_copyright_notice {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    @include roboto(300);
     font-size: 0.75em;
     color: $grey2;
     text-align: center; 
@@ -187,6 +256,7 @@ h3 {
 
 // -----------------------------------------------------------------------------
 // Navigation
+/*
 #banner {
     padding: 0;
     z-index: 2;
@@ -313,6 +383,7 @@ h3 {
 }
 */
 
+/*
 .navbar-logo img {
     line-height: 0;
     display: block;
@@ -333,6 +404,7 @@ h3 {
     margin-left: 0px;
   }
 }
+*/
 
 .full-width {
     width: 100%;
@@ -386,24 +458,25 @@ h3 {
 
 .ro-title-text {
     color: $grey2;
-    @include source-sans-pro(700);
+    @include roboto(700);//source-sans-pro(700);
     font-size: 2.0em;
 }
 
 .ro-meta-text {
     color: $grey3;
-    @include source-sans-pro(300);
+    @include roboto(300);//source-sans-pro(300);
     font-size: 1em;
 }
 
 .ro-summary-text {
     color: $grey2;
-    @include source-sans-pro(700);
+    @include roboto(700);//source-sans-pro(700);
 }
 
 .ro-body-text {
     color: $grey2;
-    @include source-sans-pro(400);
+    @include roboto(400);
+    width: 100%;
 }
 
 
@@ -496,14 +569,14 @@ h3 {
 
 .page-title {
     color: $grey2;
-    @include source-sans-pro(700);
+    @include roboto(700); //source-sans-pro(700);
     font-size: 2.5em;
     text-align: left;
 }
 
 .page-body {
     color: $grey2;
-    @include source-sans-pro(400);
+    @include roboto(400); //source-sans-pro(400);
     text-align: left;
     margin-bottom: 2.2em;
 }
@@ -515,3 +588,77 @@ h3 {
 // -----------------------------------------------------------------------------
 // Portfolio
 
+
+// -----------------------------------------------------------------------------
+// Syntax Highlighting
+// -----------------------------------------------------------------------------
+.highlight {
+    border-top: 1px solid #DCDCDC;
+    border-bottom: 1px solid #DCDCDC;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    margin-top: 1em;    
+}
+
+.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #606060; font-style: italic } /* Comment */
+.highlight .err { color: #F00000; background-color: #F0A0A0 } /* Error */
+.highlight .k { color: #208090; font-weight: bold } /* Keyword */
+.highlight .o { color: #303030 } /* Operator */
+.highlight .cm { color: #606060; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #507090 } /* Comment.Preproc */
+.highlight .c1 { color: #606060; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #c00000; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #808080 } /* Generic.Output */
+.highlight .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0040D0 } /* Generic.Traceback */
+.highlight .kc { color: #208090; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #208090; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #208090; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #0080f0; font-weight: bold } /* Keyword.Pseudo */
+.highlight .kr { color: #208090; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #6060f0; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #6000E0; font-weight: bold } /* Literal.Number */
+.highlight .s { background-color: #e0e0ff } /* Literal.String */
+.highlight .na { color: #000070 } /* Name.Attribute */
+.highlight .nb { color: #007020 } /* Name.Builtin */
+.highlight .nc { color: #e090e0; font-weight: bold } /* Name.Class */
+.highlight .no { color: #50e0d0; font-weight: bold } /* Name.Constant */
+.highlight .nd { color: #505050; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #800000 } /* Name.Entity */
+.highlight .ne { color: #F00000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #50e0d0; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #907000; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #007000 } /* Name.Tag */
+.highlight .nv { color: #003060 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #6000E0; font-weight: bold } /* Literal.Number.Float */
+.highlight .mh { color: #005080; font-weight: bold } /* Literal.Number.Hex */
+.highlight .mi { color: #6060f0; font-weight: bold } /* Literal.Number.Integer */
+.highlight .mo { color: #4000E0; font-weight: bold } /* Literal.Number.Oct */
+.highlight .sb { background-color: #e0e0ff } /* Literal.String.Backtick */
+.highlight .sc { color: #8080F0 } /* Literal.String.Char */
+.highlight .sd { color: #D04020 } /* Literal.String.Doc */
+.highlight .s2 { background-color: #e0e0ff } /* Literal.String.Double */
+.highlight .se { color: #606060; font-weight: bold; background-color: #e0e0ff } /* Literal.String.Escape */
+.highlight .sh { background-color: #e0e0ff } /* Literal.String.Heredoc */
+.highlight .si { background-color: #e0e0e0 } /* Literal.String.Interpol */
+.highlight .sx { color: #f08080; background-color: #e0e0ff } /* Literal.String.Other */
+.highlight .sr { color: #000000; background-color: #e0e0ff } /* Literal.String.Regex */
+.highlight .s1 { background-color: #e0e0ff } /* Literal.String.Single */
+.highlight .ss { color: #f0c080 } /* Literal.String.Symbol */
+.highlight .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #c0c0f0 } /* Name.Variable.Class */
+.highlight .vg { color: #f08040 } /* Name.Variable.Global */
+.highlight .vi { color: #a0a0f0 } /* Name.Variable.Instance */
+.highlight .il { color: #6060f0; font-weight: bold } /* Literal.Number.Integer.Long */

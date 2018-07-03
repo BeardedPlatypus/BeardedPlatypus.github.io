@@ -470,7 +470,7 @@ h3 {
 
 .ro-summary-text {
     color: $grey2;
-    @include roboto(700);//source-sans-pro(700);
+    @include roboto(400);//source-sans-pro(700);
 }
 
 .ro-body-text {

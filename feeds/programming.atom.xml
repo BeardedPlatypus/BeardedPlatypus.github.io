@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Monty's Blog - programming</title><link href="beardedplatypus.github.io/" rel="alternate"></link><link href="beardedplatypus.github.io/feeds/programming.atom.xml" rel="self"></link><id>beardedplatypus.github.io/</id><updated>2018-03-08T00:00:00+01:00</updated><entry><title>Creating a sticky header with elm(-ish)</title><link href="beardedplatypus.github.io/creating-a-sticky-header-with-elm-ish.html" rel="alternate"></link><published>2018-03-08T00:00:00+01:00</published><updated>2018-03-08T00:00:00+01:00</updated><author><name>Maarten Tegelaers</name></author><id>tag:None,2018-03-08:beardedplatypus.github.io/creating-a-sticky-header-with-elm-ish.html</id><summary type="html">&lt;p&gt;I have added a simple sticky header to this blog (at the time of writing). I 
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Monty's Blog - programming</title><link href="beardedplatypus.github.io/" rel="alternate"></link><link href="beardedplatypus.github.io/feeds/programming.atom.xml" rel="self"></link><id>beardedplatypus.github.io/</id><updated>2018-03-08T00:00:00+01:00</updated><entry><title>Creating a sticky header with elm(-ish)</title><link href="beardedplatypus.github.io/creating-a-sticky-header-with-elm-ish.html" rel="alternate"></link><published>2018-03-08T00:00:00+01:00</published><updated>2018-03-08T00:00:00+01:00</updated><author><name>Maarten Tegelaers</name></author><id>tag:None,2018-03-08:beardedplatypus.github.io/creating-a-sticky-header-with-elm-ish.html</id><summary type="html">I have added a simple sticky header to this blog (at the time of writing). I 
 figured I would write a little article about the design and code, both as a 
 personal reminder and to hopefully help people like you. This sticky header is
-written in elm(-ish). For those …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have added a simple sticky header to this blog (at the time of writing). I 
+written in elm(-ish). For those that do not know &lt;a href="http://elm-lang.org"&gt;elm&lt;/a&gt;, it
+is basically a functional programming languages which compiles into Javascript.
+It allows one to build interactive web applications without run-time errors.
+Ever since I had to use it for an university project, I have loved this little
+language.</summary><content type="html">&lt;p&gt;I have added a simple sticky header to this blog (at the time of writing). I 
 figured I would write a little article about the design and code, both as a 
 personal reminder and to hopefully help people like you. This sticky header is
 written in elm(-ish). For those that do not know &lt;a href="http://elm-lang.org"&gt;elm&lt;/a&gt;, it
@@ -273,10 +277,10 @@ As such, future versions of the header might look a bit differently than the
 one described here. &lt;/p&gt;
 &lt;p&gt;The full code for these examples can be found in 
 &lt;a href="https://gist.github.com/BeardedPlatypus/f33e41a5af8007a947bbcccef50eea1b"&gt;this gist&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Thanks for reading, and hopefully see you again!&lt;/p&gt;</content><category term="elm"></category><category term="html"></category></entry><entry><title>Setting up a markdown/LaTeX document.</title><link href="beardedplatypus.github.io/setting-up-a-markdownlatex-document.html" rel="alternate"></link><published>2017-10-05T00:00:00+02:00</published><updated>2017-10-05T00:00:00+02:00</updated><author><name>Maarten Tegelaers</name></author><id>tag:None,2017-10-05:beardedplatypus.github.io/setting-up-a-markdownlatex-document.html</id><summary type="html">&lt;p&gt;In this article we'll take a quick look on how to set up a markdown / LaTeX 
+&lt;p&gt;Thanks for reading, and hopefully see you again!&lt;/p&gt;</content><category term="elm"></category><category term="html"></category></entry><entry><title>Setting up a markdown/LaTeX document.</title><link href="beardedplatypus.github.io/setting-up-a-markdownlatex-document.html" rel="alternate"></link><published>2017-10-05T00:00:00+02:00</published><updated>2017-10-05T00:00:00+02:00</updated><author><name>Maarten Tegelaers</name></author><id>tag:None,2017-10-05:beardedplatypus.github.io/setting-up-a-markdownlatex-document.html</id><summary type="html">In this article we'll take a quick look on how to set up a markdown / LaTeX 
 project with the help of Python and Pandoc. The goal is to have a single command
 to compile a set of markdown documents into a single LaTeX pdf. As an example 
-project I've modified …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this article we'll take a quick look on how to set up a markdown / LaTeX 
+project I've modified my master thesis paper to consist of markdown files. </summary><content type="html">&lt;p&gt;In this article we'll take a quick look on how to set up a markdown / LaTeX 
 project with the help of Python and Pandoc. The goal is to have a single command
 to compile a set of markdown documents into a single LaTeX pdf. As an example 
 project I've modified my master thesis paper to consist of markdown files. &lt;/p&gt;

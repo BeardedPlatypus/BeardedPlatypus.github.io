@@ -1,84 +1,80 @@
 <!DOCTYPE html>
-<html lang="english">
-<head>
-
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" 
+          content = "width=device-width, initial-scale=1">
 
     <title>Monty's Blog</title>
-
-<link rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous">
-
-<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-
-<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700|Roboto:300,400"
+<link href="theme/css/rubber-squid.css" 
+      rel="stylesheet"><link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
+      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:700|Libre+Baskerville&display=swap" 
       rel="stylesheet">
 
-<link rel="stylesheet"
-      href="../theme/css/rubber-octopus.css"  >
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>  </head> 
+  <body>
+    <header class="section" 
+        style="padding-bottom: 1px">
+  <div class="container">
+    <nav class="navbar" 
+         role="navigation"
+         aria-label="main navigation">
+      <div class="navbar-brand" 
+           style="padding-right: 1.5rem;">
+        <a class="navbar-item" 
+           href="#">
+          <div id="brand-svg"></div>
+        </a>
+        <a role="button" 
+           class="navbar-burger burger" 
+           aria-label="menu" 
+           aria-expanded="false" 
+           data-target="navbarMenuContent">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="navbarMenuContent" 
+           class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item"
+             href="/index.html">
+            Blog
+          </a>
 
-
-</head>
-
-<body>
-    <header class="body">
-        <div id="header"></div>
-    </header>
-
-
-    <div class="col-12">
-        <section class="ro-body body"
-                 id="content">
-<div class="container" >
-    <div class="row justify-content-center">
-        <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8 col-xl-8">
-            <div class="col-12 ro-article"><div class="row
-                ro-article-header">
-        <div class="col-12" ><div class="row
-                        ro-article-meta
-                        ro-article-date
-                        ro-meta-text" >
-                <span>
-                    <time class="published"
-                          datetime="Thu 05 October 2017" >
-                        Thu 05 October 2017
-                    </time>
-                </span>
-            </div><div class="row
-                        ro-article-title">
-                <a href="/setting-up-a-markdownlatex-document.html">
-                    <h1 class="ro-title-text">
-                        Setting up a markdown/LaTeX document.
-                    </h1>
-                </a>
-            </div><div class="row
-                        ro-article-meta
-                        ro-article-categorisation
-                        ro-meta-text" >
-                <span>
-                    Category: 
-                    <a href="/category/programming.html">
-                        programming
-                    </a>
-                </span>
-                <span class="ro-meta-tags">
-                    Tags: 
-                    <a href="/tags/LaTeX.html">LaTeX</a>
-                    <a href="/tags/markdown.html">markdown</a>
-                    <a href="/tags/python.html">python</a>
-                    </a>
-                </span>
-            </div>
         </div>
-    </div><div class="row
-                ro-article-body">
-        <div class="ro-article-content
-                    ro-body-text">
-            <p>
-                <p>In this article we'll take a quick look on how to set up a markdown / LaTeX 
+        <div class="navbar-end">
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="container">
+  <div class="rs-divider"></div>
+  </div>
+</header>
+
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+  <article class="rs-article">
+    <div class="container">
+      <div class="rs-article_header" >
+        <div class="rs-post-meta-container">
+          <span class="rs-meta">
+            <time datetime="Thu 05 October 2017">Thu 05 October 2017</time>
+          </span>
+        </div>
+        <h1 class="rs-post-title">
+          Setting up a markdown/LaTeX document.
+        </h1>
+        <div class="rs-post-header-line"></div>
+      </div>
+      <div class="rs-article-content">
+        <p>
+          <p>In this article we'll take a quick look on how to set up a markdown / LaTeX 
 project with the help of Python and Pandoc. The goal is to have a single command
 to compile a set of markdown documents into a single LaTeX pdf. As an example 
 project I've modified my master thesis paper to consist of markdown files. </p>
@@ -300,81 +296,49 @@ should probably be replaced with the appropriate pandoc bindings for the library
 With each future project involving markdown and LaTeX, I will add a little bit of this 
 functionality</p>
 <p>That's it for now, I hope to see you again at the next article!</p>
-            </p>
-        </div>
-    </div><div class="row
-                ro-divider-container">
-            <div class="ro-divider">
-    <div class="ro-divider-line">
+        </p>
+      </div>
     </div>
-    <div class="ro-divider-icon">
-        <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-code fa-stack-1x fa-inverse"></i>
+  </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<footer class="footer sticky-footer">
+  <div class="container has-text-centered">
+    <p class="copyright-icon">
+      <a href="https://nl.linkedin.com/in/maartentegelaers">
+        <span class="icon is-large">
+          <span class="fa-stack fa-lg">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-linkedin-in fa-stack-2x fa-inverse" data-fa-transform="shrink-3"></i>
+          </span>
         </span>
-    </div>
-</div>
-
-    </div>
-</div>
-        </div>
-    </div>
-</div>
-        </section>
-    </div>
-
-    <footer id="contentinfo"  class="body sticky-footer">
-<div class="container">
-    <ul class="footer-social-media" >
-        <li>
-            <a href="https://be.linkedin.com/in/maartentegelaers">
-                <span class="fa-layers fa-fw fa-3x">
-                    <i class="fas fa-circle"></i>
-                    <i class="fa-inverse fab fa-linkedin-in" data-fa-transform="shrink-5"></i>
-                </span>
-            </a>
-        </li>
-        <li>
-            <a href="https://github.com/BeardedPlatypus">
-                <span class="fa-layers fa-fw fa-3x">
-                    <i class="fas fa-circle"></i>
-                    <i class="fa-inverse fab fa-github" data-fa-transform="shrink-5"></i>
-                </span>
-            </a>
-        </li>
-        <li>
-            <a href="https://www.youtube.com/user/Month3d">
-                <span class="fa-layers fa-fw fa-3x">
-                    <i class="fas fa-circle"></i>
-                    <i class="fa-inverse fab fa-youtube" data-fa-transform="shrink-5"></i>
-                </span>
-            </a>
-        </li>
-    </ul>
+      </a>
+      <a href="https://github.com/BeardedPlatypus">
+        <span class="icon is-large">
+          <span class="fa-stack fa-lg">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-github fa-stack-2x fa-inverse" data-fa-transform="shrink-3"></i>
+          </span>
+        </span>
+      </a>
+      <a href="https://www.youtube.com/user/Month3d">
+        <span class="icon is-large">
+          <span class="fa-stack fa-lg">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-youtube fa-stack-2x fa-inverse" data-fa-transform="shrink-3"></i>
+          </span>
+        </span>
+      </a>
+    </p>
     <p class="copyright-notice">Copyright © Maarten Tegelaers</p>
-</div>    </footer>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-<script src="../theme/js/NavMenu.js"></script>
+  </div>
+</footer>
+<script src="theme/js/cube.min.js"></script>
 <script>
-  var node = document.getElementById('header');
-  var app = Elm.NavMenu.embed(node, {
-    logo_text: "Blog",
-    nav: [ ['Blog', '/index.html']
-         ],
-    footer: [ [ 'https://be.linkedin.com/in/maartentegelaers', 'fa-linkedin-in' ]
-            , [ 'https://github.com/BeardedPlatypus', 'fa-github' ]
-            , [ 'https://www.youtube.com/user/Month3d', 'fa-youtube' ]
-            ]
-  });
-</script>
-</body>
+  var cubeNode = document.getElementById("brand-svg");
+  var app = Elm.Main.init({node: cubeNode});
+</script>  </body>
 </html>

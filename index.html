@@ -1,427 +1,155 @@
 <!DOCTYPE html>
-<html lang="english">
-<head>
-
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" 
+          content = "width=device-width, initial-scale=1">
 
     <title>Monty's Blog</title>
-
-<link rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous">
-
-<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-
-<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700|Roboto:300,400"
+<link href="theme/css/rubber-squid.css" 
+      rel="stylesheet"><link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
+      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:700|Libre+Baskerville&display=swap" 
       rel="stylesheet">
 
-<link rel="stylesheet"
-      href="../theme/css/rubber-octopus.css"  >
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>  </head> 
+  <body>
+    <header class="section" 
+        style="padding-bottom: 1px">
+  <div class="container">
+    <nav class="navbar" 
+         role="navigation"
+         aria-label="main navigation">
+      <div class="navbar-brand" 
+           style="padding-right: 1.5rem;">
+        <a class="navbar-item" 
+           href="#">
+          <div id="brand-svg"></div>
+        </a>
+        <a role="button" 
+           class="navbar-burger burger" 
+           aria-label="menu" 
+           aria-expanded="false" 
+           data-target="navbarMenuContent">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="navbarMenuContent" 
+           class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item"
+             href="/index.html">
+            Blog
+          </a>
 
-
-</head>
-
-<body>
-    <header class="body">
-        <div id="header"></div>
-    </header>
-
-
-    <div class="col-12">
-        <section class="ro-body body"
-                 id="content">
-
-
-<div class="container" >
-    <div class="row justify-content-center">
-        <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8 col-xl-8">
-            <div class="col-12 ro-article"><div class="row
-                ro-article-header">
-        <div class="col-12" ><div class="row
-                        ro-article-meta
-                        ro-article-date
-                        ro-meta-text" >
-                <span>
-                    <time class="published"
-                          datetime="Thu 08 March 2018" >
-                        Thu 08 March 2018
-                    </time>
-                </span>
-            </div><div class="row
-                        ro-article-title">
-                <a href="/creating-a-sticky-header-with-elm-ish.html">
-                    <h1 class="ro-title-text">
-                        Creating a sticky header with elm(-ish)
-                    </h1>
-                </a>
-            </div><div class="row
-                        ro-article-meta
-                        ro-article-categorisation
-                        ro-meta-text" >
-                <span>
-                    Category: 
-                    <a href="/category/programming.html">
-                        programming
-                    </a>
-                </span>
-                <span class="ro-meta-tags">
-                    Tags: 
-                    <a href="/tags/elm.html">elm</a>
-                    <a href="/tags/html.html">html</a>
-                    </a>
-                </span>
-            </div>
         </div>
-    </div><div class="row
-                ro-article-body">
-        <div class="ro-summary-text
-                    ro-article-summary">
-            <p>
-                I have added a simple sticky header to this blog (at the time of writing). I 
+        <div class="navbar-end">
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="container">
+  <div class="rs-divider"></div>
+  </div>
+</header>
+
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+<a href="/creating-a-sticky-header-with-elm-ish.html">
+  <article class="rs-article">
+    <div class="container">
+      <div class="rs-article_header" >
+        <div class="rs-meta-container">
+          <span class="rs-meta">
+            <time datetime="Thu 08 March 2018">Thu 08 March 2018</time>
+          </span>
+        </div>
+        <h1 class="rs-title">
+          Creating a sticky header with elm(-ish)
+        </h1>
+        <div class="rs-header-line"></div>
+      </div>
+      <div class="rs-summary">
+        <p>
+          <p>I have added a simple sticky header to this blog (at the time of writing). I 
 figured I would write a little article about the design and code, both as a 
 personal reminder and to hopefully help people like you. This sticky header is
-written in elm(-ish). For those that do not know <a href="http://elm-lang.org">elm</a>, it
-is basically a functional programming languages which compiles into Javascript.
-It allows one to build interactive web applications without run-time errors.
-Ever since I had to use it for an university project, I have loved this little
-language.
-            </p>
-        </div>
-        <p>
-            <a href="creating-a-sticky-header-with-elm-ish.html">Read more</a>
+written in elm(-ish). For those …</p>
         </p>
-    </div><div class="row
-                ro-divider-container">
-            <div class="ro-divider">
-    <div class="ro-divider-line">
+      </div>
+      <div class="rs-divider"></div>
     </div>
-    <div class="ro-divider-icon">
-        <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-code fa-stack-1x fa-inverse"></i>
-        </span>
-    </div>
-</div>
-
-    </div>
-</div>
-            <div class="col-12 ro-article"><div class="row
-                ro-article-header">
-        <div class="col-12" ><div class="row
-                        ro-article-meta
-                        ro-article-date
-                        ro-meta-text" >
-                <span>
-                    <time class="published"
-                          datetime="Thu 05 October 2017" >
-                        Thu 05 October 2017
-                    </time>
-                </span>
-            </div><div class="row
-                        ro-article-title">
-                <a href="/setting-up-a-markdownlatex-document.html">
-                    <h1 class="ro-title-text">
-                        Setting up a markdown/LaTeX document.
-                    </h1>
-                </a>
-            </div><div class="row
-                        ro-article-meta
-                        ro-article-categorisation
-                        ro-meta-text" >
-                <span>
-                    Category: 
-                    <a href="/category/programming.html">
-                        programming
-                    </a>
-                </span>
-                <span class="ro-meta-tags">
-                    Tags: 
-                    <a href="/tags/LaTeX.html">LaTeX</a>
-                    <a href="/tags/markdown.html">markdown</a>
-                    <a href="/tags/python.html">python</a>
-                    </a>
-                </span>
-            </div>
+  </article>
+</a>
+<a href="/setting-up-a-markdownlatex-document.html">
+  <article class="rs-article">
+    <div class="container">
+      <div class="rs-article_header" >
+        <div class="rs-meta-container">
+          <span class="rs-meta">
+            <time datetime="Thu 05 October 2017">Thu 05 October 2017</time>
+          </span>
         </div>
-    </div><div class="row
-                ro-article-body">
-        <div class="ro-summary-text
-                    ro-article-summary">
-            <p>
-                In this article we'll take a quick look on how to set up a markdown / LaTeX 
+        <h1 class="rs-title">
+          Setting up a markdown/LaTeX document.
+        </h1>
+        <div class="rs-header-line"></div>
+      </div>
+      <div class="rs-summary">
+        <p>
+          <p>In this article we'll take a quick look on how to set up a markdown / LaTeX 
 project with the help of Python and Pandoc. The goal is to have a single command
 to compile a set of markdown documents into a single LaTeX pdf. As an example 
-project I've modified my master thesis paper to consist of markdown files. 
-            </p>
-        </div>
-        <p>
-            <a href="setting-up-a-markdownlatex-document.html">Read more</a>
+project I've modified …</p>
         </p>
-    </div><div class="row
-                ro-divider-container">
-            <div class="ro-divider">
-    <div class="ro-divider-line">
+      </div>
+      <div class="rs-divider"></div>
     </div>
-    <div class="ro-divider-icon">
-        <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-code fa-stack-1x fa-inverse"></i>
+  </article>
+</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<footer class="footer sticky-footer">
+  <div class="container has-text-centered">
+    <p class="copyright-icon">
+      <a href="https://nl.linkedin.com/in/maartentegelaers">
+        <span class="icon is-large">
+          <span class="fa-stack fa-lg">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-linkedin-in fa-stack-2x fa-inverse" data-fa-transform="shrink-3"></i>
+          </span>
         </span>
-    </div>
-</div>
-
-    </div>
-</div>
-            <div class="col-12 ro-article"><div class="row
-                ro-article-header">
-        <div class="col-12" ><div class="row
-                        ro-article-meta
-                        ro-article-date
-                        ro-meta-text" >
-                <span>
-                    <time class="published"
-                          datetime="Sun 13 December 2015" >
-                        Sun 13 December 2015
-                    </time>
-                </span>
-            </div><div class="row
-                        ro-article-title">
-                <a href="/this-is-a-newer-fancy-title-or-something-that-was-posted-a-year-later.html">
-                    <h1 class="ro-title-text">
-                        This is a newer fancy title or something that was posted a year later.
-                    </h1>
-                </a>
-            </div><div class="row
-                        ro-article-meta
-                        ro-article-categorisation
-                        ro-meta-text" >
-                <span>
-                    Category: 
-                    <a href="/category/Test.html">
-                        Test
-                    </a>
-                </span>
-                <span class="ro-meta-tags">
-                    Tags: 
-                    <a href="/tags/bacon.html">bacon</a>
-                    <a href="/tags/meat.html">meat</a>
-                    </a>
-                </span>
-            </div>
-        </div>
-    </div><div class="row
-                ro-article-body">
-        <div class="ro-summary-text
-                    ro-article-summary">
-            <p>
-                Bacon ipsum dolor amet hamburger sirloin nulla, sausage deserunt jerky porchetta cillum id est tongue shankle. T-bone pork chop ad meatloaf nostrud pancetta est andouille fatback short ribs. Beef sunt picanha drumstick doner short loin tail aliqua pig leberkas. Eiusmod t-bone duis dolore bresaola sirloin capicola qui.
-            </p>
-        </div>
-        <p>
-            <a href="this-is-a-newer-fancy-title-or-something-that-was-posted-a-year-later.html">Read more</a>
-        </p>
-    </div><div class="row
-                ro-divider-container">
-            <div class="ro-divider">
-    <div class="ro-divider-line">
-    </div>
-    <div class="ro-divider-icon">
-        <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-magic fa-stack-1x fa-inverse"></i>
+      </a>
+      <a href="https://github.com/BeardedPlatypus">
+        <span class="icon is-large">
+          <span class="fa-stack fa-lg">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-github fa-stack-2x fa-inverse" data-fa-transform="shrink-3"></i>
+          </span>
         </span>
-    </div>
-</div>
-
-    </div>
-</div>
-            <div class="col-12 ro-article"><div class="row
-                ro-article-header">
-        <div class="col-12" ><div class="row
-                        ro-article-meta
-                        ro-article-date
-                        ro-meta-text" >
-                <span>
-                    <time class="published"
-                          datetime="Sun 13 December 2015" >
-                        Sun 13 December 2015
-                    </time>
-                </span>
-            </div><div class="row
-                        ro-article-title">
-                <a href="/this-is-a-newer-fancy-title-or-something-that-was-posted-a-year-later-durp.html">
-                    <h1 class="ro-title-text">
-                        This is a newer fancy title or something that was posted a year later durp.
-                    </h1>
-                </a>
-            </div><div class="row
-                        ro-article-meta
-                        ro-article-categorisation
-                        ro-meta-text" >
-                <span>
-                    Category: 
-                    <a href="/category/Test.html">
-                        Test
-                    </a>
-                </span>
-                <span class="ro-meta-tags">
-                    Tags: 
-                    <a href="/tags/bacon.html">bacon</a>
-                    <a href="/tags/meat.html">meat</a>
-                    </a>
-                </span>
-            </div>
-        </div>
-    </div><div class="row
-                ro-article-body">
-        <div class="ro-summary-text
-                    ro-article-summary">
-            <p>
-                Bacon ipsum dolor amet hamburger sirloin nulla, sausage deserunt jerky porchetta cillum id est tongue shankle. T-bone pork chop ad meatloaf nostrud pancetta est andouille fatback short ribs. Beef sunt picanha drumstick doner short loin tail aliqua pig leberkas. Eiusmod t-bone duis dolore bresaola sirloin capicola qui.
-            </p>
-        </div>
-        <p>
-            <a href="this-is-a-newer-fancy-title-or-something-that-was-posted-a-year-later-durp.html">Read more</a>
-        </p>
-    </div><div class="row
-                ro-divider-container">
-            <div class="ro-divider">
-    <div class="ro-divider-line">
-    </div>
-    <div class="ro-divider-icon">
-        <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-magic fa-stack-1x fa-inverse"></i>
+      </a>
+      <a href="https://www.youtube.com/user/Month3d">
+        <span class="icon is-large">
+          <span class="fa-stack fa-lg">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-youtube fa-stack-2x fa-inverse" data-fa-transform="shrink-3"></i>
+          </span>
         </span>
-    </div>
-</div>
-
-    </div>
-</div>
-            <div class="col-12 ro-article"><div class="row
-                ro-article-header">
-        <div class="col-12" ><div class="row
-                        ro-article-meta
-                        ro-article-date
-                        ro-meta-text" >
-                <span>
-                    <time class="published"
-                          datetime="Sat 13 December 2014" >
-                        Sat 13 December 2014
-                    </time>
-                </span>
-            </div><div class="row
-                        ro-article-title">
-                <a href="/this-is-a-fancy-title-or-something.html">
-                    <h1 class="ro-title-text">
-                        This is a fancy title or something.
-                    </h1>
-                </a>
-            </div><div class="row
-                        ro-article-meta
-                        ro-article-categorisation
-                        ro-meta-text" >
-                <span>
-                    Category: 
-                    <a href="/category/Test.html">
-                        Test
-                    </a>
-                </span>
-                <span class="ro-meta-tags">
-                    Tags: 
-                    <a href="/tags/bacon.html">bacon</a>
-                    <a href="/tags/meat.html">meat</a>
-                    </a>
-                </span>
-            </div>
-        </div>
-    </div><div class="row
-                ro-article-body">
-        <div class="ro-summary-text
-                    ro-article-summary">
-            <p>
-                Bacon ipsum dolor amet hamburger sirloin nulla, sausage deserunt jerky porchetta cillum id est tongue shankle. T-bone pork chop ad meatloaf nostrud pancetta est andouille fatback short ribs. Beef sunt picanha drumstick doner short loin tail aliqua pig leberkas. Eiusmod t-bone duis dolore bresaola sirloin capicola qui.
-            </p>
-        </div>
-        <p>
-            <a href="this-is-a-fancy-title-or-something.html">Read more</a>
-        </p>
-    </div><div class="row
-                ro-divider-container">
-            <div class="ro-divider">
-    <div class="ro-divider-line">
-    </div>
-    <div class="ro-divider-icon">
-        <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-magic fa-stack-1x fa-inverse"></i>
-        </span>
-    </div>
-</div>
-
-    </div>
-</div>
-        </div>
-    </div>
-</div>
-
-        </section>
-    </div>
-
-    <footer id="contentinfo"  class="body sticky-footer">
-<div class="container">
-    <ul class="footer-social-media" >
-        <li>
-            <a href="https://be.linkedin.com/in/maartentegelaers">
-                <span class="fa-layers fa-fw fa-3x">
-                    <i class="fas fa-circle"></i>
-                    <i class="fa-inverse fab fa-linkedin-in" data-fa-transform="shrink-5"></i>
-                </span>
-            </a>
-        </li>
-        <li>
-            <a href="https://github.com/BeardedPlatypus">
-                <span class="fa-layers fa-fw fa-3x">
-                    <i class="fas fa-circle"></i>
-                    <i class="fa-inverse fab fa-github" data-fa-transform="shrink-5"></i>
-                </span>
-            </a>
-        </li>
-        <li>
-            <a href="https://www.youtube.com/user/Month3d">
-                <span class="fa-layers fa-fw fa-3x">
-                    <i class="fas fa-circle"></i>
-                    <i class="fa-inverse fab fa-youtube" data-fa-transform="shrink-5"></i>
-                </span>
-            </a>
-        </li>
-    </ul>
+      </a>
+    </p>
     <p class="copyright-notice">Copyright © Maarten Tegelaers</p>
-</div>    </footer>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-<script src="../theme/js/NavMenu.js"></script>
+  </div>
+</footer>
+<script src="theme/js/cube.min.js"></script>
 <script>
-  var node = document.getElementById('header');
-  var app = Elm.NavMenu.embed(node, {
-    logo_text: "Blog",
-    nav: [ ['Blog', '/index.html']
-         ],
-    footer: [ [ 'https://be.linkedin.com/in/maartentegelaers', 'fa-linkedin-in' ]
-            , [ 'https://github.com/BeardedPlatypus', 'fa-github' ]
-            , [ 'https://www.youtube.com/user/Month3d', 'fa-youtube' ]
-            ]
-  });
-</script>
-</body>
+  var cubeNode = document.getElementById("brand-svg");
+  var app = Elm.Main.init({node: cubeNode});
+</script>  </body>
 </html>

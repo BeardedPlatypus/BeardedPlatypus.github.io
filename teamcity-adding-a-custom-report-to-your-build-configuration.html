@@ -111,7 +111,7 @@ additional information, which is produced as part of our build procedure. This
 can be anything, really. It can be used to track performance times, it can be 
 used to build a custom coverage tool. All we need to add this custom report to
 our TeamCity configuration, is an html file. This html file will be hosted in
-the TeamCity report tab, [see][https://confluence.jetbrains.com/display/TCD10/Including+Third-Party+Reports+in+the+Build+Results].
+the TeamCity report tab, <a href="https://confluence.jetbrains.com/display/TCD10/Including+Third-Party+Reports+in+the+Build+Results">see this documentation</a>.
 You can even put your html file in an archive like zip, and just refer to it.
 Something we will do. </p>
 <p>In order to make this report available to our tab, we do need to add it to our
@@ -134,29 +134,29 @@ file into a single zip, for easy download.</p>
 <ol>
 <li>
 <p>First navigate to the build configuration, in which we want to produce the
-   report. Press the <em>Edit Configuration Settings</em> link in the top right corner
-   next to the <em>run</em> and <em>actions</em> button. From here, select the <em>Build Steps</em>
-   link on the left hand side of the screen.</p>
+     report. Press the <em>Edit Configuration Settings</em> link in the top right corner
+     next to the <em>run</em> and <em>actions</em> button. From here, select the <em>Build Steps</em>
+     link on the left hand side of the screen.</p>
 </li>
 <li>
 <p>We are presented with several buttons that allow us to modify our build
-   configuration. We want to press <em>Add build step</em> to create our new build
-   step at the end of our configuration. </p>
+     configuration. We want to press <em>Add build step</em> to create our new build
+     step at the end of our configuration. </p>
 </li>
 <li>
 <p>You are presented with a wizard to set up your build step. In our case, we
-   want to execute a python script, which we will do from the Command Line, 
-   thus we select <em>Command Line</em> as our runner type, did not see that coming
-   did you? </p>
+     want to execute a python script, which we will do from the Command Line, 
+     thus we select <em>Command Line</em> as our runner type, did not see that coming
+     did you? </p>
 </li>
 <li>
 <p>Choose an appropriate <em>Step name</em>, this will show up in the build steps
-   page we were on earlier. </p>
+     page we were on earlier. </p>
 </li>
 <li>
 <p>In our case we want to execute the python script regardless of whether the
-   test runs were successfull, so instead of <em>If all previous steps finished successfully</em>
-   we can select, <em>Even if some of the previous steps failed</em>.</p>
+     test runs were successfull, so instead of <em>If all previous steps finished successfully</em>
+     we can select, <em>Even if some of the previous steps failed</em>.</p>
 </li>
 <li>
 <p>We can leave the <em>Working Directory</em> empty if you are running from the
@@ -165,60 +165,73 @@ file into a single zip, for easy download.</p>
 </li>
 <li>
 <p>We can also leave the <em>Custom script</em> bit, and move on to filling in the
-   build script content.<br>
-   On our build server we have installed <code>conda</code>, which we will use to quickly
-   generate a python3 environemnt, which we will use to execute the script.
-   Then we will run the script, and finally we will remove the environment 
-   again, because it is always good to clean up after yourself.<br>
-   This leads to the following script:<br>
-<code>CALL conda create -y -n &lt;someEnvName&gt; python=3.5
-   CALL activate &lt;someEnvName&gt;
-   CALL python "path/to/your/script.py" [withOptionalArguments]
-   CALL deactivate
-   CALL conda remove -y -n &lt;someEnvName&gt; --all</code><br>
-   Of course, you want to replace <code>&lt;someEnvName&gt;</code> with your actual environment
-   name, and the python call with the one that actually executes your script.</p>
+     build script content.  </p>
+<p>On our build server we have installed <code>conda</code>, which we will use to quickly
+ generate a python3 environemnt, which we will use to execute the script.
+ Then we will run the script, and finally we will remove the environment 
+ again, because it is always good to clean up after yourself.<br>
+ This leads to the following script:  </p>
 </li>
 </ol>
+<div class="highlight"><pre><span></span><span class="n">CALL</span> <span class="n">conda</span> <span class="n">create</span> <span class="n">-y</span> <span class="n">-n</span> <span class="p">&lt;</span><span class="n">someEnvName</span><span class="p">&gt;</span> <span class="n">python</span><span class="p">=</span><span class="n">3</span><span class="p">.</span><span class="n">5</span>  
+<span class="n">CALL</span> <span class="n">activate</span> <span class="p">&lt;</span><span class="n">someEnvName</span><span class="p">&gt;</span>  
+<span class="n">CALL</span> <span class="n">python</span> <span class="s2">&quot;path/to/your/script.py&quot;</span> <span class="no">[withOptionalArguments]</span>  
+<span class="n">CALL</span> <span class="n">deactivate</span>  
+<span class="n">CALL</span> <span class="n">conda</span> <span class="n">remove</span> <span class="n">-y</span> <span class="n">-n</span> <span class="p">&lt;</span><span class="n">someEnvName</span><span class="p">&gt;</span> <span class="p">-</span><span class="n">-all</span>  
+</pre></div>
+
+
 <p>We now got our reporting tool set up, which will produce our output somewhere
 in our check-out folder (hopefully).</p>
 <h2>Adding the report to the artifacts</h2>
 <p>Assuming we have our reports being generated somewhere within the check-out 
 folder. We will have to add them to our artifacts. </p>
 <ol>
-<li>First navigate to the build configuration to which we want to add our report
-   tab. Then press <em>Edit Configuration Settings</em> next to the <em>Run</em> and <em>Actions</em>
-   buttons.</li>
-<li>On the page that opens there should be an <em>Artifact paths</em> section. We can 
-   add the path to our report here, such that it gets released as an artifact.
-   The given path should be relative to the check-out folder.<br>
-   In our case, the report is made in an <em>Artifacts</em> folder, and is called
-   <em>dia_report.zip</em> (naming has never been one of my strong suits). Thus our
-   artifact becomes.<br>
-<code>Artifacts\dia_report.zip</code><br>
-   If you already have a run that produced the report, you can also press the
-   little tree button next to the text field, to select it, producing the 
-   correct path.<br>
-   With that done, you should see your report in the next run as an artifact.</li>
+<li>
+<p>First navigate to the build configuration to which we want to add our report
+     tab. Then press <em>Edit Configuration Settings</em> next to the <em>Run</em> and <em>Actions</em>
+     buttons.</p>
+</li>
+<li>
+<p>On the page that opens there should be an <em>Artifact paths</em> section. We can 
+     add the path to our report here, such that it gets released as an artifact.
+     The given path should be relative to the check-out folder.<br>
+     In our case, the report is made in an <em>Artifacts</em> folder, and is called
+     <em>dia_report.zip</em> (naming has never been one of my strong suits). Thus our
+     artifact becomes.  </p>
+<p><code>Artifacts\dia_report.zip</code>  </p>
+<p>If you already have a run that produced the report, you can also press the
+ little tree button next to the text field, to select it, producing the 
+ correct path.  </p>
+<p>With that done, you should see your report in the next run as an artifact.</p>
+</li>
 </ol>
 <h2>Adding a custom build report</h2>
 <p>The last step is adding the actual custom report tab to the build configuration.
 This is not done within the build configuration, something I found a bit counter
 intuitive, but instead should be done at the project root. </p>
 <ol>
-<li>Navigate to the <code>&lt;root project&gt;</code> and select <em>Edit Project Settings</em> in the 
-   top right corner.</li>
-<li>Navigate to the <em>Report Tabs</em> page through the menu on your left hand side.</li>
-<li>There are two options, you can create a new project report tab, or a build
-   report tab. Project report tabs will show on the project, and use the 
-   artifacts produced by one of the build configurations within the project.
-   The build tab is what we want. It allows us to set a path to a report html.
-   Any build configuration that contains an html file within its artifacts at 
-   this specific path, will have this build tab.</li>
+<li>
+<p>Navigate to the <code>&lt;root project&gt;</code> and select <em>Edit Project Settings</em> in the 
+     top right corner.</p>
+</li>
+<li>
+<p>Navigate to the <em>Report Tabs</em> page through the menu on your left hand side.</p>
+</li>
+<li>
+<p>There are two options, you can create a new project report tab, or a build
+     report tab. Project report tabs will show on the project, and use the 
+     artifacts produced by one of the build configurations within the project.
+     The build tab is what we want. It allows us to set a path to a report html.
+     Any build configuration that contains an html file within its artifacts at 
+     this specific path, will have this build tab.</p>
+<p>As such, press the <em>Create new build report tab</em></p>
+</li>
+<li>
+<p>Now set the <em>Tab Title</em> and the <em>Start page</em> of your report html. 
+     Press save, and voila! We should have ourselves a custom report tab.</p>
+</li>
 </ol>
-<p>As such, press the <em>Create new build report tab</em>
-4. Now set the <em>Tab Title</em> and the <em>Start page</em> of your report html. 
-   Press save, and voila! We should have ourselves a custom report tab.</p>
 <h1>Conclusion</h1>
 <p>Within this article we added a simple custom report tab to one of our TeamCity
 build configurations. We can use this to provide easily provide additional 

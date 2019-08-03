@@ -58,13 +58,17 @@ publish. Lastly, the script zips the whole set of log files and the index
 file into a single zip, for easy download.&lt;/p&gt;
 &lt;p&gt;In order to execute this script, a build step is added to the configuration: &lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;First navigate to the build configuration, in which we want to produce the
+&lt;li&gt;
+&lt;p&gt;First navigate to the build configuration, in which we want to produce the
    report. Press the &lt;em&gt;Edit Configuration Settings&lt;/em&gt; link in the top right corner
    next to the &lt;em&gt;run&lt;/em&gt; and &lt;em&gt;actions&lt;/em&gt; button. From here, select the &lt;em&gt;Build Steps&lt;/em&gt;
-   link on the left hand side of the screen.&lt;/li&gt;
-&lt;li&gt;We are presented with several buttons that allow us to modify our build
+   link on the left hand side of the screen.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;We are presented with several buttons that allow us to modify our build
    configuration. We want to press &lt;em&gt;Add build step&lt;/em&gt; to create our new build
-   step at the end of our configuration. &lt;/li&gt;
+   step at the end of our configuration. &lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;You are presented with a wizard to set up your build step. In our case, we
    want to execute a python script, which we will do from the Command Line, 
@@ -87,21 +91,21 @@ file into a single zip, for easy download.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;We can also leave the &lt;em&gt;Custom script&lt;/em&gt; bit, and move on to filling in the
-   build script content.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;On our build server we have installed &lt;code&gt;conda&lt;/code&gt;, which we will use to quickly
+   build script content.&lt;br&gt;
+   On our build server we have installed &lt;code&gt;conda&lt;/code&gt;, which we will use to quickly
    generate a python3 environemnt, which we will use to execute the script.
    Then we will run the script, and finally we will remove the environment 
-   again, because it is always good to clean up after yourself.&lt;/p&gt;
-&lt;p&gt;This leads to the following script:
-   &lt;code&gt;CALL conda create -y -n &amp;lt;someEnvName&amp;gt; python=3.5
+   again, because it is always good to clean up after yourself.&lt;br&gt;
+   This leads to the following script:&lt;br&gt;
+&lt;code&gt;CALL conda create -y -n &amp;lt;someEnvName&amp;gt; python=3.5
    CALL activate &amp;lt;someEnvName&amp;gt;
    CALL python "path/to/your/script.py" [withOptionalArguments]
    CALL deactivate
-   CALL conda remove -y -n &amp;lt;someEnvName&amp;gt; --all&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Of course, you want to replace &lt;code&gt;&amp;lt;someEnvName&amp;gt;&lt;/code&gt; with your actual environment
+   CALL conda remove -y -n &amp;lt;someEnvName&amp;gt; --all&lt;/code&gt;&lt;br&gt;
+   Of course, you want to replace &lt;code&gt;&amp;lt;someEnvName&amp;gt;&lt;/code&gt; with your actual environment
    name, and the python call with the one that actually executes your script.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;We now got our reporting tool set up, which will produce our output somewhere
 in our check-out folder (hopefully).&lt;/p&gt;
 &lt;h2&gt;Adding the report to the artifacts&lt;/h2&gt;
@@ -113,16 +117,16 @@ folder. We will have to add them to our artifacts. &lt;/p&gt;
    buttons.&lt;/li&gt;
 &lt;li&gt;On the page that opens there should be an &lt;em&gt;Artifact paths&lt;/em&gt; section. We can 
    add the path to our report here, such that it gets released as an artifact.
-   The given path should be relative to the check-out folder. &lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;In our case, the report is made in an &lt;em&gt;Artifacts&lt;/em&gt; folder, and is called
+   The given path should be relative to the check-out folder.&lt;br&gt;
+   In our case, the report is made in an &lt;em&gt;Artifacts&lt;/em&gt; folder, and is called
    &lt;em&gt;dia_report.zip&lt;/em&gt; (naming has never been one of my strong suits). Thus our
-   artifact becomes. &lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Artifacts\dia_report.zip&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;If you already have a run that produced the report, you can also press the
+   artifact becomes.&lt;br&gt;
+&lt;code&gt;Artifacts\dia_report.zip&lt;/code&gt;&lt;br&gt;
+   If you already have a run that produced the report, you can also press the
    little tree button next to the text field, to select it, producing the 
-   correct path.&lt;/p&gt;
-&lt;p&gt;With that done, you should see your report in the next run as an artifact.&lt;/p&gt;
+   correct path.&lt;br&gt;
+   With that done, you should see your report in the next run as an artifact.&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h2&gt;Adding a custom build report&lt;/h2&gt;
 &lt;p&gt;The last step is adding the actual custom report tab to the build configuration.
 This is not done within the build configuration, something I found a bit counter

@@ -132,13 +132,17 @@ publish. Lastly, the script zips the whole set of log files and the index
 file into a single zip, for easy download.</p>
 <p>In order to execute this script, a build step is added to the configuration: </p>
 <ol>
-<li>First navigate to the build configuration, in which we want to produce the
+<li>
+<p>First navigate to the build configuration, in which we want to produce the
    report. Press the <em>Edit Configuration Settings</em> link in the top right corner
    next to the <em>run</em> and <em>actions</em> button. From here, select the <em>Build Steps</em>
-   link on the left hand side of the screen.</li>
-<li>We are presented with several buttons that allow us to modify our build
+   link on the left hand side of the screen.</p>
+</li>
+<li>
+<p>We are presented with several buttons that allow us to modify our build
    configuration. We want to press <em>Add build step</em> to create our new build
-   step at the end of our configuration. </li>
+   step at the end of our configuration. </p>
+</li>
 <li>
 <p>You are presented with a wizard to set up your build step. In our case, we
    want to execute a python script, which we will do from the Command Line, 
@@ -161,21 +165,21 @@ file into a single zip, for easy download.</p>
 </li>
 <li>
 <p>We can also leave the <em>Custom script</em> bit, and move on to filling in the
-   build script content.</p>
-</li>
-</ol>
-<p>On our build server we have installed <code>conda</code>, which we will use to quickly
+   build script content.<br>
+   On our build server we have installed <code>conda</code>, which we will use to quickly
    generate a python3 environemnt, which we will use to execute the script.
    Then we will run the script, and finally we will remove the environment 
-   again, because it is always good to clean up after yourself.</p>
-<p>This leads to the following script:
-   <code>CALL conda create -y -n &lt;someEnvName&gt; python=3.5
+   again, because it is always good to clean up after yourself.<br>
+   This leads to the following script:<br>
+<code>CALL conda create -y -n &lt;someEnvName&gt; python=3.5
    CALL activate &lt;someEnvName&gt;
    CALL python "path/to/your/script.py" [withOptionalArguments]
    CALL deactivate
-   CALL conda remove -y -n &lt;someEnvName&gt; --all</code></p>
-<p>Of course, you want to replace <code>&lt;someEnvName&gt;</code> with your actual environment
+   CALL conda remove -y -n &lt;someEnvName&gt; --all</code><br>
+   Of course, you want to replace <code>&lt;someEnvName&gt;</code> with your actual environment
    name, and the python call with the one that actually executes your script.</p>
+</li>
+</ol>
 <p>We now got our reporting tool set up, which will produce our output somewhere
 in our check-out folder (hopefully).</p>
 <h2>Adding the report to the artifacts</h2>
@@ -187,16 +191,16 @@ folder. We will have to add them to our artifacts. </p>
    buttons.</li>
 <li>On the page that opens there should be an <em>Artifact paths</em> section. We can 
    add the path to our report here, such that it gets released as an artifact.
-   The given path should be relative to the check-out folder. </li>
-</ol>
-<p>In our case, the report is made in an <em>Artifacts</em> folder, and is called
+   The given path should be relative to the check-out folder.<br>
+   In our case, the report is made in an <em>Artifacts</em> folder, and is called
    <em>dia_report.zip</em> (naming has never been one of my strong suits). Thus our
-   artifact becomes. </p>
-<p><code>Artifacts\dia_report.zip</code></p>
-<p>If you already have a run that produced the report, you can also press the
+   artifact becomes.<br>
+<code>Artifacts\dia_report.zip</code><br>
+   If you already have a run that produced the report, you can also press the
    little tree button next to the text field, to select it, producing the 
-   correct path.</p>
-<p>With that done, you should see your report in the next run as an artifact.</p>
+   correct path.<br>
+   With that done, you should see your report in the next run as an artifact.</li>
+</ol>
 <h2>Adding a custom build report</h2>
 <p>The last step is adding the actual custom report tab to the build configuration.
 This is not done within the build configuration, something I found a bit counter

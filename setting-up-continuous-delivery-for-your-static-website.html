@@ -131,17 +131,17 @@ and lastly the configuration files, which can be found in
 <a href="https://github.com/BeardedPlatypus/personal-website-config">this repository</a>. </p>
 <p>After completing a full run of the compilation of the website we will have 
 the following (simplified) directory structure:</p>
-<div class="highlight"><pre><span></span><span class="n">Base</span>                  <span class="o">#</span> <span class="n">config</span> <span class="n">git</span> <span class="n">repository</span>
-<span class="err">├───</span><span class="n">content</span>           <span class="o">#</span> <span class="n">content</span> <span class="n">git</span> <span class="n">repository</span>
-<span class="err">│</span>   <span class="err">├───</span><span class="n">articles</span>
-<span class="err">│</span>   <span class="err">└───</span><span class="n">pages</span>
-<span class="err">├───</span><span class="n">plugins</span>           <span class="o">#</span> <span class="n">plugins</span> <span class="n">used</span> <span class="k">by</span> <span class="n">pelican</span>
-<span class="err">├───</span><span class="n">production</span>        <span class="o">#</span> <span class="k">output</span> <span class="n">folder</span> <span class="k">of</span> <span class="n">pelican</span>
-<span class="err">├───</span><span class="n">theme</span>
-<span class="err">│</span>   <span class="err">└───</span><span class="n">rubber</span><span class="o">-</span><span class="n">squid</span>
-<span class="err">│</span>       <span class="err">├───</span><span class="k">static</span>
-<span class="err">│</span>       <span class="err">└───</span><span class="n">templates</span>
-<span class="err">└───</span><span class="n">website_dist</span>      <span class="o">#</span> <span class="k">output</span> <span class="k">of</span> <span class="n">gulp</span> <span class="n">postPelican</span>
+<div class="highlight"><pre><span></span><span class="err">Base                  # config git repository</span>
+<span class="err">├───content           # content git repository</span>
+<span class="err">│   ├───articles</span>
+<span class="err">│   └───pages</span>
+<span class="err">├───plugins           # plugins used by pelican</span>
+<span class="err">├───production        # output folder of pelican</span>
+<span class="err">├───theme</span>
+<span class="err">│   └───rubber-squid</span>
+<span class="err">│       ├───static</span>
+<span class="err">│       └───templates</span>
+<span class="err">└───website_dist      # output of gulp postPelican</span>
 </pre></div>
 
 
@@ -160,7 +160,7 @@ summaries for the blog index page. I have modified this slightly to remove any
 links from within the summaries.</p>
 <p>When pelican is properly installed, the static website can be generated through
 the following command: </p>
-<div class="highlight"><pre><span></span><span class="n">pelican</span> <span class="n">content</span> <span class="o">-</span><span class="n">s</span> <span class="n">publishconf</span><span class="p">.</span><span class="n">py</span>
+<div class="highlight"><pre><span></span><span class="err">pelican content -s publishconf.py</span>
 </pre></div>
 
 
@@ -183,7 +183,7 @@ I set up a simple  workflow, based upon
 <a href="https://css-tricks.com/gulp-for-beginners/">this tutorial</a> to do so.</p>
 <p>The pre step at the moment of writing merely compiles the sass files through the
 following gulp command:</p>
-<div class="highlight"><pre><span></span><span class="n">gulp</span> <span class="n">prePelican</span>
+<div class="highlight"><pre><span></span><span class="err">gulp prePelican</span>
 </pre></div>
 
 
@@ -192,7 +192,7 @@ and puts them in a <code>website_dist</code> folder. It also copies over any of 
 js, and feed files. I currently have not set up the minimisation of the js file, 
 as I already did this in a separate step, when I created my own js. However in the
 future there is a good chance I will add this. This step can be executed as follows:</p>
-<div class="highlight"><pre><span></span><span class="n">gulp</span> <span class="n">postPelican</span>
+<div class="highlight"><pre><span></span><span class="err">gulp postPelican</span>
 </pre></div>
 
 
@@ -267,16 +267,16 @@ latest.</p>
 installs our requirements.txt file. The requirements file specifies which packages
 need to be installed. For pelican we need both the pelican package and the markdown
 package, as such it looks liks this:</p>
-<div class="highlight"><pre><span></span><span class="n">Markdown</span><span class="o">==</span><span class="mi">3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span>
-<span class="n">pelican</span><span class="o">==</span><span class="mi">4</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span>
+<div class="highlight"><pre><span></span><span class="err">Markdown==3.1.1</span>
+<span class="err">pelican==4.0.1</span>
 </pre></div>
 
 
 <p>Once these steps have executed, we have our python installation ready to use, and
 we can add the pelican compile step.</p>
-<div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">script</span><span class="p">:</span> <span class="o">|</span>
-    <span class="n">pelican</span> <span class="n">content</span> <span class="o">-</span><span class="n">s</span> <span class="n">publishconf</span><span class="p">.</span><span class="n">py</span>
-  <span class="n">displayName</span><span class="p">:</span> <span class="s1">&#39;Pelican Compile&#39;</span>
+<div class="highlight"><pre><span></span><span class="err">- script: |</span>
+<span class="err">    pelican content -s publishconf.py</span>
+<span class="err">  displayName: &#39;Pelican Compile&#39;</span>
 </pre></div>
 
 
@@ -326,16 +326,16 @@ After running the install, we can use gulp to compile our team and optimise the
 output of pelican.</p>
 <p>Since we defined all our pre-pelican steps in one command, the step in our configuration
 becomes:</p>
-<div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">script</span><span class="p">:</span> <span class="o">|</span>
-    <span class="n">gulp</span> <span class="n">prePelican</span>
-  <span class="n">displayName</span><span class="p">:</span> <span class="s1">&#39;Pre-Pelican Compile&#39;</span>
+<div class="highlight"><pre><span></span><span class="err">- script: |</span>
+<span class="err">    gulp prePelican</span>
+<span class="err">  displayName: &#39;Pre-Pelican Compile&#39;</span>
 </pre></div>
 
 
 <p>and the post pelican step becomes:</p>
-<div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">script</span><span class="p">:</span> <span class="o">|</span>
-    <span class="n">gulp</span> <span class="n">postPelican</span>
-  <span class="n">displayName</span><span class="p">:</span> <span class="s1">&#39;Post-Pelican Compile&#39;</span>
+<div class="highlight"><pre><span></span><span class="err">- script: |</span>
+<span class="err">    gulp postPelican</span>
+<span class="err">  displayName: &#39;Post-Pelican Compile&#39;</span>
 </pre></div>
 
 
@@ -388,7 +388,7 @@ yourself. Ideally, you would use some token based way to authenticate yourself,
 however I have not come around to do so in my own pipeline, so instead we can alse  use 
 basic authentication for this within github. In order to do so we need to specify 
 our URL as follows:</p>
-<div class="highlight"><pre><span></span><span class="nl">https</span><span class="p">:</span><span class="err">\\</span><span class="o">&lt;</span><span class="nl">account_name</span><span class="p">:</span><span class="n">account_pw</span><span class="nv">@github</span><span class="p">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">repository</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="n">name</span><span class="o">&gt;/&lt;</span><span class="n">repository</span><span class="w"> </span><span class="n">name</span><span class="o">&gt;</span><span class="p">.</span><span class="n">git</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="c">https:\\&lt;account_name:account_pw@github.com/&lt;repository account name&gt;/&lt;repository name&gt;.git</span>
 </pre></div>
 
 
@@ -465,9 +465,9 @@ need to do the following things:</p>
 repository, we can create an empty check out of our repo, in
 the <code>website_dist</code> folder. This can be achieved with the 
 following step:</p>
-<div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">powershell</span><span class="p">:</span> <span class="o">|</span>
-    <span class="n">git</span> <span class="n">clone</span> <span class="c1">--no-checkout &quot;https://github.com/BeardedPlatypus/BeardedPlatypus.github.io&quot; website_dist</span>
-  <span class="n">displayName</span><span class="p">:</span> <span class="s1">&#39;Check out - BeardedPlatypus.io&#39;</span>
+<div class="highlight"><pre><span></span><span class="err">- powershell: |</span>
+<span class="err">    git clone --no-checkout &quot;https://github.com/BeardedPlatypus/BeardedPlatypus.github.io&quot; website_dist</span>
+<span class="err">  displayName: &#39;Check out - BeardedPlatypus.io&#39;</span>
 </pre></div>
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Monty's Blog - articles</title><link href="beardedplatypus.github.io/" rel="alternate"></link><link href="beardedplatypus.github.io/feeds/articles.atom.xml" rel="self"></link><id>beardedplatypus.github.io/</id><updated>2021-04-03T00:00:00+02:00</updated><entry><title>Learning Unity: Rendering a simple 2D with the geometry shader.</title><link href="beardedplatypus.github.io/learning-unity-rendering-a-simple-2d-with-the-geometry-shader.html" rel="alternate"></link><published>2021-04-03T00:00:00+02:00</published><updated>2021-04-03T00:00:00+02:00</updated><author><name>Maarten Tegelaers</name></author><id>tag:None,2021-04-03:beardedplatypus.github.io/learning-unity-rendering-a-simple-2d-with-the-geometry-shader.html</id><summary type="html">&lt;p&gt;Within this post, we will take a look at geometry shaders within Unity, in
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Monty's Blog - articles</title><link href="beardedplatypus.github.io/" rel="alternate"></link><link href="beardedplatypus.github.io/feeds/articles.atom.xml" rel="self"></link><id>beardedplatypus.github.io/</id><updated>2021-04-03T00:00:00+02:00</updated><entry><title>Learning Unity: Rendering a simple 2D grid with the geometry shader.</title><link href="beardedplatypus.github.io/learning-unity-rendering-a-simple-2d-grid-with-the-geometry-shader.html" rel="alternate"></link><published>2021-04-03T00:00:00+02:00</published><updated>2021-04-03T00:00:00+02:00</updated><author><name>Maarten Tegelaers</name></author><id>tag:None,2021-04-03:beardedplatypus.github.io/learning-unity-rendering-a-simple-2d-grid-with-the-geometry-shader.html</id><summary type="html">&lt;p&gt;Within this post, we will take a look at geometry shaders within Unity, in
 particular how to utilise it to render simple 2D grids in a 3D scene.&lt;/p&gt;
 &lt;p&gt;Over the past few weeks I have slowly been getting my feet wet again with 
 Unity. I submitted an entry into the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Within this post, we will take a look at geometry shaders within Unity, in
@@ -41,7 +41,7 @@ behaviour. It might well be possible to achieve the same effect with built in
 tooling, however because I am a software engineer by trade, this was the path
 of least resistance to me.&lt;/p&gt;
 &lt;p&gt;The script has the following content:&lt;/p&gt;
-&lt;div style="margin: 5px 0px 5px 0px;"&gt;
+&lt;div style="margin: 2em 0em 2em 0em;"&gt;
 &lt;script src="https://gist.github.com/BeardedPlatypus/1d6e286997a09c9d59e367bd8791cb42.js"&gt;&lt;/script&gt;
 &lt;/div&gt;
 
@@ -76,7 +76,7 @@ vertices. This is exactly how will represent our geometry. First we create a
 new script that will contain our mesh generation code. Once this is created
 let's move to your favourite IDE and get coding.&lt;/p&gt;
 &lt;p&gt;First we provide some fields which can be customised in the editor:&lt;/p&gt;
-&lt;div style="margin: 5px 0px 5px 0px;"&gt;
+&lt;div style="margin: 2em 0em 2em 0em;"&gt;
 &lt;script src="https://gist.github.com/BeardedPlatypus/4da98624980b704239db00a7e19e070a.js"&gt;&lt;/script&gt;
 &lt;/div&gt;
 
@@ -89,7 +89,7 @@ let's move to your favourite IDE and get coding.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;Next we will create the necessary components on our game object when starting
 the player:&lt;/p&gt;
-&lt;div style="margin: 5px 0px 5px 0px;"&gt;
+&lt;div style="margin: 2em 0em 2em 0em;"&gt;
 &lt;script src="https://gist.github.com/BeardedPlatypus/408e3dda00b7a51d5f3eb7bd1102686e.js"&gt;&lt;/script&gt;
 &lt;/div&gt;
 
@@ -108,7 +108,7 @@ specified values. The indices define the lines between the vertices. These are
 set with the &lt;code&gt;SetIndices&lt;/code&gt; method, and specified as being &lt;code&gt;MeshTopology.Lines&lt;/code&gt;.
 This will ensure that in our shader the lines are interpreted as lines, and not
 triangles.&lt;/p&gt;
-&lt;div style="margin: 5px 0px 5px 0px;"&gt;
+&lt;div style="margin: 2em 0em 2em 0em;"&gt;
 &lt;script src="https://gist.github.com/BeardedPlatypus/663fd5bb130979ed04568102c301d504.js"&gt;&lt;/script&gt;
 &lt;/div&gt;
 
@@ -132,13 +132,13 @@ changes to the default unlit shader:&lt;/p&gt;
 &lt;li&gt;Change the &lt;code&gt;v2g vert&lt;/code&gt; shader to hand over the world coordinate vertex data instead of clip space&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;This should lead to code similar to the following:&lt;/p&gt;
-&lt;div style="margin: 5px 0px 5px 0px;"&gt;
+&lt;div style="margin: 2em 0em 2em 0em;"&gt;
 &lt;script src="https://gist.github.com/BeardedPlatypus/69fd0926c005ba95297780f9cfc3f0fa.js"&gt;&lt;/script&gt;
 &lt;/div&gt;
 
 &lt;p&gt;Before discuss how to generate lines with width, let's first look at the 
 declaration of the geometry shader:&lt;/p&gt;
-&lt;div style="margin: 5px 0px 5px 0px;"&gt;
+&lt;div style="margin: 2em 0em 2em 0em;"&gt;
 &lt;script src="https://gist.github.com/BeardedPlatypus/69a9399f4c29d17459dbec37d5e9532f.js"&gt;&lt;/script&gt;
 &lt;/div&gt;
 
@@ -165,17 +165,17 @@ of the quad we can adopt the following strategy given the following points:&lt;/
 
 &lt;p&gt;Rotating a vector (x, y) by 90 degrees, corresponds with the vector (y, - x). 
 We can define the direction of the line and the corresponding offset as&lt;/p&gt;
-&lt;div style="margin: 5px 0px 5px 0px;"&gt;
+&lt;div style="margin: 2em 0em 2em 0em;"&gt;
 &lt;script src="https://gist.github.com/BeardedPlatypus/337ed23961bf7cae5473500c94f83776.js"&gt;&lt;/script&gt;
 &lt;/div&gt;
 
 &lt;p&gt;Next we can define the four new vertices as follows:&lt;/p&gt;
-&lt;div style="margin: 5px 0px 5px 0px;"&gt;
+&lt;div style="margin: 2em 0em 2em 0em;"&gt;
 &lt;script src="https://gist.github.com/BeardedPlatypus/63903e04278ed419d1d552d52a38ed79.js"&gt;&lt;/script&gt;
 &lt;/div&gt;
 
 &lt;p&gt;With the vertices of a line defined, we can generate the two triangles, as shown in the figure:&lt;/p&gt;
-&lt;div style="margin: 5px 0px 5px 0px;"&gt;
+&lt;div style="margin: 2em 0em 2em 0em;"&gt;
 &lt;script src="https://gist.github.com/BeardedPlatypus/ec39ef3001d562286a1e38ec9e97a176.js"&gt;&lt;/script&gt;
 &lt;/div&gt;
 
@@ -227,7 +227,7 @@ should see the following:&lt;/p&gt;
 into circles. In order to do this, it is easiest to start with a copy of your 
 lines shader and remove the content of the geometry function. Next we adjust
 the function declaration to the following:&lt;/p&gt;
-&lt;div style="margin: 5px 0px 5px 0px;"&gt;
+&lt;div style="margin: 2em 0em 2em 0em;"&gt;
 &lt;script src="https://gist.github.com/BeardedPlatypus/0d09f5282614ea8150beb20b5d12e6e2.js"&gt;&lt;/script&gt;
 &lt;/div&gt;
 
@@ -254,7 +254,7 @@ other vertices, as illustrated here:&lt;/p&gt;
 &lt;p align='center'&gt;&lt;img align='center' src='https://github.com/BeardedPlatypus/media-storage/blob/main/blog/geometry-shader/points_illustration.png?raw=true' width='100%'&gt;&lt;/p&gt;
 
 &lt;p&gt;If we put this into code we will get the following:&lt;/p&gt;
-&lt;div style="margin: 5px 0px 5px 0px;"&gt;
+&lt;div style="margin: 2em 0em 2em 0em;"&gt;
 &lt;script src="https://gist.github.com/BeardedPlatypus/51444f0528f9b65ad4a00979d5497700.js"&gt;&lt;/script&gt;
 &lt;/div&gt;
 
